@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rumo ao Deploy</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+  <!-- ================= TELA INICIAL ================= -->
+  <section id="tela-inicio" class="tela ativa" aria-labelledby="titulo-jogo">
+    <div class="inicio-card">
+      <p class="prompt">$ python rumo_ao_deploy.py</p>
+      <h1 id="titulo-jogo" class="titulo"></h1>
+      <p class="subtitulo" id="subtitulo-jogo"></p>
+
+      <div class="inicio-grid">
+        <div class="bloco">
+          <h2>// Como jogar</h2>
+          <ol class="instrucoes">
+            <li>Escolha de <b>2 a 4 jogadores</b> e digite os nomes.</li>
+            <li>Na sua vez, clique em <b>Jogar dado</b> (ou aperte <kbd>Espaço</kbd>).</li>
+            <li>Avance o número tirado. Casas especiais têm efeitos de programação!</li>
+            <li>Quem fizer o <b>DEPLOY</b> primeiro (chegar à última casa) vence.</li>
+          </ol>
+          <div class="legenda">
+            <span class="leg bom">Ajuda</span>
+            <span class="leg ruim">Atrapalha</span>
+            <span class="leg sorte">Sorte / surpresa</span>
+          </div>
+        </div>
+
+        <div class="bloco">
+          <h2>// Quantos jogadores?</h2>
+          <div class="qtd" role="radiogroup" aria-label="Quantidade de jogadores">
+            <button type="button" role="radio" data-qtd="2">2</button>
+            <button type="button" role="radio" data-qtd="3">3</button>
+            <button type="button" role="radio" data-qtd="4">4</button>
+          </div>
+          <div id="campos-nomes" class="nomes"></div>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button type="button" id="btn-comecar" class="btn primario grande">▶ Começar partida</button>
+        <button type="button" id="btn-ver-casas" class="btn">Ver casas especiais</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TELA DO JOGO ================= -->
+  <section id="tela-jogo" class="tela" aria-label="Partida">
+    <header class="topo">
+      <div class="marca"><span class="prompt-mini">&gt;_</span> <span id="titulo-topo"></span></div>
+      <div class="info-rodada">Rodada <b id="num-rodada">1</b></div>
+      <div class="topo-botoes">
+        <button type="button" class="btn pequeno" id="btn-regras">📖 Regras e casas</button>
+        <button type="button" class="btn pequeno" id="btn-som" aria-pressed="true">🔊 Som</button>
+        <button type="button" class="btn pequeno" id="btn-tela-cheia">⛶ Tela cheia</button>
+        <button type="button" class="btn pequeno perigo" id="btn-reiniciar">⟲ Reiniciar</button>
+      </div>
+    </header>
+
+    <main class="jogo">
+      <div class="tabuleiro-wrap" id="tabuleiro-wrap">
+        <div class="tabuleiro" id="tabuleiro">
+          <svg class="caminho" id="caminho" aria-hidden="true"></svg>
+          <div class="pecas" id="pecas" aria-hidden="true"></div>
+        </div>
+        <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+      </div>
+
+      <aside class="painel">
+        <div class="turno" id="turno" aria-live="polite">
+          <span class="turno-label">Vez de</span>
+          <span class="turno-nome" id="turno-nome">—</span>
+        </div>
+
+        <div class="dado-area">
+          <div class="dado" id="dado" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <button type="button" class="btn primario grande" id="btn-dado">🎲 Jogar dado</button>
+          <p class="dica">ou aperte <kbd>Espaço</kbd></p>
+        </div>
+
+        <div class="bloco-painel">
+          <h2>Jogadores</h2>
+          <ul class="lista-jogadores" id="lista-jogadores"></ul>
+        </div>
+
+        <div class="bloco-painel log-bloco">
+          <h2>Console de eventos</h2>
+          <ul class="log" id="log" aria-live="polite"></ul>
+        </div>
+      </aside>
+    </main>
+  </section>
+
+  <!-- ================= TELA FINAL ================= -->
+  <section id="tela-fim" class="tela" aria-labelledby="vencedor-titulo">
+    <canvas id="confete" aria-hidden="true"></canvas>
+    <div class="fim-card">
+      <p class="prompt">Build succeeded ✔ · Deploy concluído</p>
+      <div class="trofeu" aria-hidden="true">🏆</div>
+      <h1 id="vencedor-titulo"><span id="vencedor-nome"></span> venceu!</h1>
+      <p class="fim-stats" id="fim-stats"></p>
+      <ol class="ranking" id="ranking"></ol>
+      <div class="acoes">
+        <button type="button" class="btn primario grande" id="btn-revanche">⟲ Revanche (mesmos jogadores)</button>
+        <button type="button" class="btn grande" id="btn-nova">Nova partida</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODAL ================= -->
+  <div class="modal-fundo" id="modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <div class="modal-icone" id="modal-icone"></div>
+      <h2 id="modal-titulo"></h2>
+      <div class="modal-corpo" id="modal-corpo"></div>
+      <div class="modal-botoes" id="modal-botoes"></div>
+      <div class="modal-timer" id="modal-timer"></div>
+    </div>
+  </div>
+
+  <script src="casas.js"></script>
+  <script src="jogo.js"></script>
+</body>
+</html>

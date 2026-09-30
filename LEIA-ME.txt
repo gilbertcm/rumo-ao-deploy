@@ -1,0 +1,35 @@
+RUMO AO DEPLOY — jogo de tabuleiro para o stand de Ciência da Computação
+=========================================================================
+
+COMO ABRIR
+  Dê dois cliques em "index.html" (abre no navegador). Não precisa de internet.
+  Clique em "Tela cheia" (ou aperte F11).
+
+ARQUIVOS
+  index.html  -> página do jogo
+  casas.js    -> CONFIGURAÇÃO: casas especiais, efeitos, textos, cores, velocidade
+  estilo.css  -> visual
+  jogo.js     -> lógica do jogo
+
+COMO EDITAR AS CASAS
+  Abra "casas.js" no Bloco de Notas ou VS Code. Cada casa especial é um bloco assim:
+
+    { casa: 4, rotulo: "i += 3", icone: "➕", titulo: "Incremento!",
+      texto: "Explicação que aparece na mensagem.",
+      efeito: { tipo: "avancar", casas: 3 } },
+
+  - Para ADICIONAR uma casa: copie um bloco, troque o número da casa e os textos.
+  - Para REMOVER: apague o bloco inteiro.
+  - Os tipos de efeito disponíveis estão explicados no topo do casas.js.
+  - Salve e recarregue a página (F5).
+
+OUTROS AJUSTES (no topo do casas.js)
+  totalCasas         -> tamanho do tabuleiro (32 = partida de ~5 a 10 min)
+  colunas            -> casas por linha em tela deitada
+  colunasRetrato     -> casas por linha em tela em pé (totem vertical)
+  chegadaExata       -> true = precisa do número exato para chegar ao DEPLOY
+  velocidadePasso    -> velocidade da animação das peças
+  fecharMensagemApos -> fecha as mensagens sozinho após N segundos (0 = só no botão)
+
+ATALHOS
+  Espaço / Enter = jogar dado ou confirmar mensagem · Esc = fechar mensagem
