@@ -84,7 +84,7 @@ Desenvolvido com apoio de IA como ferramenta de programação. A ideia, as regra
 
 **Gilbert Carmo Macêdo**, estudante de Ciência da Computação na UESC
 
-[GitHub](https://github.com/gilbertcm) · [LinkedIn](https://www.linkedin.com/in/gilbert_cm)
+[GitHub](https://github.com/gilbertcm) · [LinkedIn](https://www.linkedin.com/in/gilbertcm)
 
 ## Licença
 
