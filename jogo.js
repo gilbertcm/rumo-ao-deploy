@@ -309,7 +309,7 @@
     return `<ul class="regras-lista">
       <li>De 2 a 4 jogadores. Cada um, na sua vez, joga o dado (1 a 6) e anda exatamente essa quantidade de casas.</li>
       <li>Ao parar numa casa especial, o efeito dela acontece na hora. Efeitos não encadeiam.</li>
-      <li>${C.chegadaExata ? "Para fazer o DEPLOY é preciso tirar o número exato; se passar, a peça volta o que sobrou." : "Chegou ou passou da última casa: DEPLOY feito, vitória!"}</li>
+      <li>${C.chegadaExata ? `Perto do fim (a partir da casa ${FINAL - 5}) só faz o DEPLOY quem tirar o número exato de casas que faltam. Se o dado passar do DEPLOY, a peça fica parada e o jogo mostra quanto é preciso tirar.` : "Chegou ou passou da última casa: DEPLOY feito, vitória!"}</li>
       </ul>
       <table class="tabela-casas"><thead><tr><th>Casa</th><th>Tipo</th><th>O que acontece</th></tr></thead><tbody>${linhas}</tbody></table>`;
   }
@@ -338,10 +338,7 @@
     let p = j.pos, dir = Math.sign(passos);
     const caminho = [];
     for (let k = 0; k < Math.abs(passos); k++) {
-      if (dir > 0 && p === FINAL) {
-        if (!C.chegadaExata) break;
-        dir = -1;
-      }
+      if (dir > 0 && p === FINAL) break;
       if (dir < 0 && p === 0) break;
       p += dir;
       caminho.push(p);
@@ -457,6 +454,27 @@
     const v = await rolarDado();
     E.jogadas++;
     log(`tirou ${v}.`, "", j);
+
+    // chegada exata: se o dado passar do DEPLOY, a peça não anda e mostra quanto precisa tirar
+    const falta = FINAL - j.pos;
+    if (C.chegadaExata && v > falta) {
+      som.ruim();
+      log(`precisa tirar ${falta} (ou menos) para andar — exatamente ${falta} para o DEPLOY.`, "ruim", j);
+      await abrirModal({
+        icone: "🎯", titulo: "Quase lá! Precisa do número exato", categoria: "ruim",
+        html: `<div class="quem"><span style="color:${j.cor};font-weight:800">${esc(j.nome)}</span> está na casa ${j.pos} e tirou ${v}</div>
+               Faltam ${falta} casa${falta > 1 ? "s" : ""} para o DEPLOY 🚀.<br>
+               <span class="efeito">➜ Você precisa tirar ${falta} no dado para fazer o DEPLOY${falta > 1 ? ` (ou de 1 a ${falta - 1} para se aproximar)` : ""}.</span><br>
+               <small>A peça fica parada e a vez passa para o próximo jogador.</small>`,
+        autoFechar: C.fecharMensagemApos || 0,
+      });
+      proximoTurno();
+      E.ocupado = false;
+      atualizarPainel();
+      $("#btn-dado").focus();
+      return;
+    }
+
     await moverPassos(j, v);
 
     let deNovo = false;

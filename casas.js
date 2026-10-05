@@ -34,7 +34,7 @@ window.CONFIG = {
   totalCasas: 32,          // inclui a largada (0) e a chegada
   colunas: 8,              // casas por linha do tabuleiro (formato zigue-zague) em tela deitada
   colunasRetrato: 4,       // casas por linha quando a tela está em pé (totem vertical/celular)
-  chegadaExata: false,     // true = precisa tirar o número exato para chegar (senão "quica" de volta)
+  chegadaExata: true,      // true = perto do DEPLOY, só chega tirando o número exato (se tirar mais, a peça fica parada)
 
   velocidadePasso: 260,    // milissegundos por casa na animação
   fecharMensagemApos: 0,   // segundos para fechar a mensagem sozinha (0 = só no botão)
@@ -107,8 +107,12 @@ window.CONFIG = {
       texto: "for i in range(2): avance() — o laço executou 2 vezes.",
       efeito: { tipo: "avancar", casas: 2 } },
 
-    { casa: 29, rotulo: "Null",      icone: "☠️", titulo: "NullPointerException",
-      texto: "Você acessou um objeto que era null. Volte 3 casas e trate esse erro!",
-      efeito: { tipo: "voltar", casas: 3 } },
+    // { casa: 29, rotulo: "Null",      icone: "☠️", titulo: "NullPointerException",
+    //   texto: "Você acessou um objeto que era null. Volte 3 casas e trate esse erro!",
+    //   efeito: { tipo: "voltar", casas: 3 } },
+
+    { casa: 30, rotulo: "Faill",      icone: "😈", titulo: "Volte pro inicio",
+      texto: "Seu código foi hackeado. Volte pro inicio do jogo!",
+      efeito: { tipo: "voltar", casas: 29 } },
   ],
 };
