@@ -104,15 +104,15 @@ window.CONFIG = {
       efeito: { tipo: "voltar", casas: 4 } },
 
     { casa: 27, rotulo: "for i in",  icone: "🔄", titulo: "Laço for",
-      texto: "for i in range(2): avance() — o laço executou 2 vezes.",
-      efeito: { tipo: "avancar", casas: 2 } },
+      texto: "for i in range(2): jogar() — o laço ainda tem mais uma iteração. Jogue o dado de novo!",
+      efeito: { tipo: "jogarNovamente" } },
 
     // { casa: 29, rotulo: "Null",      icone: "☠️", titulo: "NullPointerException",
     //   texto: "Você acessou um objeto que era null. Volte 3 casas e trate esse erro!",
     //   efeito: { tipo: "voltar", casas: 3 } },
 
-    { casa: 30, rotulo: "Fail",       icone: "😈", titulo: "Volte pro inicio",
-      texto: "Seu código foi hackeado. Volte pro inicio do jogo!",
+    { casa: 29, rotulo: "git reset", icone: "⏪", titulo: "git reset --hard",
+      texto: "Você rodou git reset --hard no primeiro commit e todo o seu progresso sumiu! Volte para o main() e recomece.",
       efeito: { tipo: "irPara", casa: 0 }, categoria: "ruim" },
   ],
 };
