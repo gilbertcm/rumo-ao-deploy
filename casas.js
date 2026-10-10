@@ -111,8 +111,8 @@ window.CONFIG = {
     //   texto: "Você acessou um objeto que era null. Volte 3 casas e trate esse erro!",
     //   efeito: { tipo: "voltar", casas: 3 } },
 
-    { casa: 30, rotulo: "Faill",      icone: "😈", titulo: "Volte pro inicio",
+    { casa: 30, rotulo: "Fail",       icone: "😈", titulo: "Volte pro inicio",
       texto: "Seu código foi hackeado. Volte pro inicio do jogo!",
-      efeito: { tipo: "voltar", casas: 29 } },
+      efeito: { tipo: "irPara", casa: 0 }, categoria: "ruim" },
   ],
 };
